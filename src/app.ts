@@ -9,6 +9,7 @@ import rateLimit from '@fastify/rate-limit';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { getLogs } from './utils/logger';
+import loggerRoutes from './routes/logs.routes';
 
 
 connectDB();
@@ -53,9 +54,7 @@ app.register(metricRoutes, { prefix: '/api/metrics' });
 app.register(queueRoutes, { prefix: '/api/dlq' });
 
 
-app.get('/api/logs', async (request, reply) => {
-  reply.send(getLogs().slice(-100)); 
-});
+app.register(loggerRoutes, { prefix: '/api' });
 
 
 export default app;
