@@ -8,12 +8,16 @@ import dayjs from 'dayjs';
 
 dotenv.config();
 
-const connection = new IORedis({
-  host: process.env.REDIS_HOST || '127.0.0.1',
-  port: Number(process.env.REDIS_PORT) || 6379,
-  maxRetriesPerRequest: null,
-  enableReadyCheck: false
-});
+// const connection = new IORedis({
+//   host: process.env.REDIS_HOST || '127.0.0.1',
+//   port: Number(process.env.REDIS_PORT) || 6379,
+//   maxRetriesPerRequest: null,
+//   enableReadyCheck: false
+// });
+
+const redisUrl = "redis://red-d40ravvgi27c73cuha7g:6379";
+
+const connection = new IORedis(redisUrl);
 
 async function startMetricsWorker() {
   console.log(' Metrics worker started, waiting for scheduled jobs...');

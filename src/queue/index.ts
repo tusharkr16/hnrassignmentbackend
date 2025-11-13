@@ -3,10 +3,17 @@ import IORedis from 'ioredis';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const connection = new IORedis({
-  host:  '127.0.0.1',
-  port:  6379
-});
+// const connection = new IORedis({
+//   host:  '127.0.0.1',
+//   port:  6379
+// });
+
+const redisUrl = "redis://red-d40ravvgi27c73cuha7g:6379"
+
+const connection = new IORedis(redisUrl);
+
+connection.on('connect', () => console.log('✅ Connected to Redis'));
+connection.on('error', (err) => console.error('Redis error:', err));
 
 export const jobQueue = new Queue('eventQueue', { connection });
 

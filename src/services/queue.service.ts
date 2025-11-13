@@ -3,14 +3,18 @@ import IORedis from 'ioredis';
 import { jobQueue } from '../queue';
 
 
+
+
+const redisUrl = "redis://red-d40ravvgi27c73cuha7g:6379";
+
 export const getDLQService = async (queueName: string) => {
   let queue: Queue;
 
   if (queueName === 'eventQueue') {
     queue = jobQueue;
   } else {
-   
-    const connection = new IORedis({ host: '127.0.0.1', port: 6379 });
+   const connection = new IORedis(redisUrl);
+    // const connection = new IORedis({ host: '127.0.0.1', port: 6379 });
     queue = new Queue(queueName, { connection });
   }
 
