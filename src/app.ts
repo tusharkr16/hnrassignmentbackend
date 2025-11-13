@@ -8,6 +8,7 @@ import { queueRoutes } from './routes/queue.routes';
 import rateLimit from '@fastify/rate-limit'; 
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
+import { getLogs } from './utils/logger';
 
 
 connectDB();
@@ -50,4 +51,11 @@ app.register(uploadRoutes, { prefix: '/api' });
 app.register(batchRoutes, { prefix: '/api/batches' });
 app.register(metricRoutes, { prefix: '/api/metrics' });
 app.register(queueRoutes, { prefix: '/api/dlq' });
+
+
+app.get('/api/logs', async (request, reply) => {
+  reply.send(getLogs().slice(-100)); 
+});
+
+
 export default app;
