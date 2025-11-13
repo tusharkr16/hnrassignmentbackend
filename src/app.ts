@@ -10,6 +10,7 @@ import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { getLogs } from './utils/logger';
 import loggerRoutes from './routes/logs.routes';
+import cors from '@fastify/cors';
 
 
 connectDB();
@@ -24,6 +25,15 @@ app.register(rateLimit, {
   max: 5,       
   timeWindow: '10 seconds',
   
+});
+
+app.register(cors, {
+  origin: [
+    'http://localhost:3000',
+    'https://hnrfrontend.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true, 
 });
 
 
