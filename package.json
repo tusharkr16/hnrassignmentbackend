@@ -11,6 +11,7 @@
     "test": "jest --passWithNoTests --runInBand --detectOpenHandles"
   },
   "dependencies": {
+    "@fastify/cors": "^11.1.0",
     "@fastify/multipart": "^6.0.0",
     "@fastify/rate-limit": "^7.6.0",
     "@fastify/swagger": "^8.14.0",
